@@ -111,6 +111,7 @@ $yamada->attend();
 
 
 // Q4 オブジェクト-2
+// 修正
 class Student
 {
     public $studentId;
@@ -122,9 +123,9 @@ class Student
         $this->studentName = $name;
     }
 
-    public function attend($php)
+    public function attend($subject)
     {
-        echo $this->studentName . 'は' . $php . 'の授業に参加しました。学籍番号：' . $this->studentId;
+        echo $this->studentName . 'は' . $subject . 'の授業に参加しました。学籍番号：' . $this->studentId;
     }
 }
 
@@ -134,9 +135,9 @@ $yamada->attend('PHP'); // 因数で渡している
 
 // Q5 定義済みクラス
 // 問題1
-$time = new DateTime("2021/3/2");
-$return = $time->modify("-1 month")->format("Y-m-d");
-echo $return;
+$date = new DateTime("2021/3/2");
+$formattedDate = $date->modify("-1 month")->format("Y-m-d");
+echo $formattedDate;
 
 
 // 問題2

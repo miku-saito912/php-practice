@@ -13,21 +13,25 @@ echo $num;
 
 
 // Q3 日付操作
+// 修正
 $time = date("Y年m月d日 H時i分s秒");
-echo "現在時刻は、" . $time . "です。";
+echo '現在時刻は、' . $time . 'です。';
+
+// ダブルとシングルクォートの違い
+// 答え：変数展開をするかしないかの違いです。
+// ダブルを使用すると、変数を代入した値が表示されます。
+// シングルクォートを使用すると、変数を代入した値ではなく、変数名がそのまま表示されます。
+// なので、今回は変数展開する必要がないので、ダブルではなくシングルクォートを使うのが正解となります
 
 
 // Q4 条件分岐-1 if文
+// 修正
 $device = 'mac';
 
-if ($device === 'windows') {
-    echo '使用OSは、windowsです。';
-} else {
-    if ($device === 'mac') {
-    echo '使用OSは、macです。';
+if ($device === 'windows' || $device === 'mac') {
+    echo '使用OSは、' . $device . 'です。';
 } else {
     echo 'どちらでもありません。';
-}
 }
 
 
@@ -38,11 +42,13 @@ echo $message;
 
 
 // Q6 配列
-$prefecture = ['神奈川県', '北海道' ,'栃木県', '千葉県'];
-echo $prefecture[2] . 'と' . $prefecture[3] . 'は関東地方の都道府県です。';
+// 修正
+$prefectures = ['茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県'];
+echo $prefectures[1] . 'と' . $prefectures[4] . 'は関東地方の都道府県です。';
 
 
 // Q7 連想配列-1
+// 修正
 $ken = [
   "東京都" => "新宿区",
   "神奈川県" => "横浜市",
@@ -53,12 +59,13 @@ $ken = [
   "茨城県" => "水戸市"
 ];
 
-foreach ($ken as $key => $name) {
-  echo $name . "\n";
+foreach ($ken as $prefectures => $city) {
+  echo $city . "\n";
 }
 
 
 // Q8 連想配列-2
+// 修正
 $ken = [
   "東京都" => "新宿区",
   "神奈川県" => "横浜市",
@@ -69,14 +76,15 @@ $ken = [
   "茨城県" => "水戸市"
 ];
 
-foreach ($ken as $key => $name) {
-  if ($key == "埼玉県") {
-      echo $key . "の県庁所在地は、" . $name . "です。";
+foreach ($ken as $prefectures => $city) {
+  if ($prefectures == "埼玉県") {
+      echo $prefectures . "の県庁所在地は、" . $city . "です。";
   }
 }
 
 
 // Q9 連想配列-3
+// 修正
 $ken = [
   "東京都" => "新宿区",
   "神奈川県" => "横浜市",
@@ -92,19 +100,19 @@ $ken = [
 $kanto = [
   "東京都",
   "神奈川県",
-  "千葉県", 
-  "埼玉県", 
-  "栃木県", 
-  "群馬県", 
+  "千葉県",
+  "埼玉県",
+  "栃木県",
+  "群馬県",
   "茨城県"
   ];
 
 
-foreach ($ken as $key => $name) {
-  if (in_array($key, $kanto)) {
-      echo $key . "の県庁所在地は、" . $name . "です。" . "\n";
+foreach ($ken as $prefectures => $city) {
+  if (in_array($prefectures, $kanto)) {
+      echo $prefectures . "の県庁所在地は、" . $city . "です。" . "\n";
   } else {
-      echo $key . "は関東地方ではありません。" . "\n";
+      echo $prefectures . "は関東地方ではありません。" . "\n";
   }
 }
 
@@ -120,56 +128,72 @@ sayHello('安藤');
 
 
 // Q11 関数-2
-function calcTaxInPrice($price)
-{
+// 修正
+
+function calcTaxInPrice($price) //計算した値を返す
+    {
     $tax = 0.10; // 消費税率10%
-    $taxInPrice = $price * (1 + $tax); //1000 * 1.1
-    return $taxInPrice;
-}
+    return $price * (1 + $tax); // //1000 * 1.1
+    }
 
 $price = 1000; // 税抜きの金額
 
-$taxInPrice = calcTaxInPrice($price); //上から下に返ってきた値を代入
+$taxInPrice = calcTaxInPrice($price); // 計算した値を受け取る
 
 echo $price . '円の商品の税込価格は' . $taxInPrice . '円です。';
 
 
+
+// ----修正前(※一応残しておく)
+// function calcTaxInPrice($price)
+// {
+//     $tax = 0.10; // 消費税率10%
+//     $taxInPrice = $price * (1 + $tax); //1000 * 1.1　//ここで代入しなくても出来る
+//     return $taxInPrice;
+// }
+
+// $price = 1000; // 税抜きの金額
+// $taxInPrice = calcTaxInPrice($price); //上から下に返ってきた値を代入
+// echo $price . '円の商品の税込価格は' . $taxInPrice . '円です。';
+
+
+
 // Q12 関数とif文
+// 修正
 function distinguishNum($number)
 {
-    if ($number % 2 == 0){
-        echo $number . 'は奇数です。';
+    if ($number % 2 === 0){
+        return $number . 'は偶数です。';
     } else {
-        echo $number . 'は奇数です。';
+        return $number . 'は奇数です。';
     }
 }
 
-distinguishNum(11);
-distinguishNum(24);
+echo distinguishNum(11) . "\n";
+echo distinguishNum(24);
+
 
 
 // Q13 関数とswitch文
+// 修正
 function evaluateGrade($Grade)
 {
 switch ($Grade) {
     case 'A':
-        echo '合格です。';
-        break;
-        
     case 'B':
-        echo '合格です。';
+        return '合格です。';
         break;
         
     case 'C':
-        echo '合格ですが追加課題があります。';
+        return '合格ですが追加課題があります。';
         break;
         
     case 'D':
-        echo '不合格です。';
+        return '不合格です。';
         break;
         
     default:
-        echo '判定不明です。講師に問い合わせてください。';
+        return '判定不明です。講師に問い合わせてください。';
         break;
 }
 }
